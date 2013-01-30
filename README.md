@@ -2,7 +2,7 @@
 
 fgen is a file generator library to be used to generate project structures, file templates and/or snippets. Templates are based on the [mustache](http://mustache.github.com) template language.
 
-In order to generate files, you need to provide a folder of templates and a context object to fgen, and fgen will generate the appropriate folder structures and files. fgen can be used as core engine of any generator software.
+In order to generate files, you need to provide a folder of templates and a context object to fgen, and fgen will generate the appropriate folder structures and files. fgen can be used as the core engine of any generator software.
 
 ## Example
 
@@ -59,7 +59,7 @@ fgen.createGenerator("nodejs_templates", function(err, generator) {
 
 ### fgen.createGenerator(templatesFolder, [readyListener])
 
-Returns a [`fgen.Generator`](#class-fgen-generator) object, this reprensents the `templatesFolder` and its generation logics. The `readyListener` is a function which is automatically added to the [`'ready'`](#event-ready) event.
+Returns a [`fgen.Generator`](#class-fgengenerator) object, this reprensents the `templatesFolder` and its generation logics. The `readyListener` is a function which is automatically added to the [`'ready'`](#eventready) event.
 
 ## Class: fgen.Generator
 
@@ -67,7 +67,7 @@ This is an EventEmitter with the following events:
 
 ### Event:'ready'
 
-Emitted when generator has loaded the templates and it's ready to render. You should always call other generation methods after/in this event.
+Emitted when the generator has loaded the templates and it's ready to render. You should always call other generation methods after/in this event.
 
 ### generator.dirpath
 
@@ -85,7 +85,7 @@ File names with double underscore like `__name__.js` will be substituted for the
 
 ### generator.generateAll(to, callback)
 
-Like `generator.generate` but generates all the files and folder structure.
+Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structure.
 
 ## License
 
