@@ -126,5 +126,19 @@ describe("fgen", function() {
         done();
       });
     });
+
+    it("single folder to folder", function(done) {
+      gen.generate("doc", "test/nodejs_project_templates/tmp/", function() {
+        fs.existsSync("test/nodejs_project_templates/tmp/doc").should.be.true;
+        done();
+      });
+    });
+
+    it("single folder to a renamed folder", function(done) {
+      gen.generate("doc", "test/nodejs_project_templates/tmp/d", function() {
+        fs.existsSync("test/nodejs_project_templates/tmp/d").should.be.true;
+        done();
+      });
+    });
   });
 });
