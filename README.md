@@ -1,4 +1,112 @@
-fgen
-====
+# fgen
 
-A file generator library to be used to generate project structures, file templates and/or snippets.
+fgen is a file generator library to be used to generate project structures, file templates and/or snippets. Templates are based on the [mustache](http://mustache.github.com) template language.
+
+In order to generate files, you need to provide a folder of templates and a context object to fgen, and fgen will generate the appropriate folder structures and files. fgen can be used as core engine of any generator software.
+
+## Example
+
+Given you have a folder named `nodejs_templates`, with the following template files structure:
+
+    .gitignore
+    LICENSE
+    README.md
+    package.json
+    lib/__name__.js
+    test/
+
+You can write a generator to generate all files or a single file as demonstrated below:
+
+```js
+var fgen = require("fgen");
+
+// You provide a folder with mustache syntax template files.
+fgen.createGenerator("nodejs_templates", function(err, generator) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  // Underscore files like __name__.js will be substituted for the
+  // corresponding values in the context object.
+  generator.context = {
+    name: "myProj",
+    version: "0.0.0",
+    desc: "My project desc.",
+    keywords: [
+      {keyword: "my"},
+      {keyword: "project", last: true}
+    ]
+  };
+
+  // Generate all files and folder structures.
+  generator.generateAll("~/Desktop/myProj", function(err) {
+    if (!err) { console.log("Successful generation."); }
+  });
+
+  // Single file generation.
+  // generator.generate("LICENSE", "~/Desktop/myProj/LIC", function(err) {
+  //   if (!err) { console.log("Successful generation."); }
+  // });
+});
+```
+
+## Installation
+
+    $ npm install fgen
+
+## Documentation
+
+### fgen.createGenerator(templatesFolder, [readyListener])
+
+Returns a [`fgen.Generator`](#class-fgen-generator) object, this reprensents the `templatesFolder` and its generation logics. The `readyListener` is a function which is automatically added to the [`'ready'`](#event-ready) event.
+
+## Class: fgen.Generator
+
+This is an EventEmitter with the following events:
+
+### Event:'ready'
+
+Emitted when generator has loaded the templates and it's ready to render. You should always call other generation methods after/in this event.
+
+### generator.dirpath
+
+The `templatesFolder` you passed in when you created the generator.
+
+### generator.context
+
+The context object to pass to templates. It contains all the generation logics. Please refer to [mustache's documentation](http://mustache.github.com/mustache.5.html) about this context. We use [Hogan.js](http://twitter.github.com/hogan.js) as the mustache engine, so you can also refer to Hogan.js' documentation.
+
+### generator.generate(key, to, callback)
+
+Generates a single file. `key` corresponds to templates' path, e.g. *lib/__name__.js*, `to` is where you want to generate the file to. Once file generation is complete, `callback` is called with the first argument being `err` if any.
+
+File names with double underscore like `__name__.js` will be substituted for the corresponding values in the context object.
+
+### generator.generateAll(to, callback)
+
+Like `generator.generate` but generates all the files and folder structure.
+
+## License
+
+(The MIT License)
+
+Copyright (c) 2013 Seth Yuan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
