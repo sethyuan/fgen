@@ -32,7 +32,8 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "hogan.js": "~2.0.0",
-    "fs.extra": "~1.2.0"
+    "fs.extra": "~1.2.0",
+    "async": "~0.1.22"
   },
   "devDependencies": {
     "should": "~1.2.1"

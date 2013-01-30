@@ -16,7 +16,7 @@
   },
   "keywords": [
   {{#keywords}}
-    "{{keyword}}"{{#last_keyword}},{{/last_keyword}}
+    "{{keyword}}"{{^last_keyword}},{{/last_keyword}}
   {{/keywords}}
   ],
   "author": {

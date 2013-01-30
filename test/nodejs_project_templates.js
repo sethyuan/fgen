@@ -22,7 +22,8 @@ describe("fgen", function() {
         "package.json",
         ".gitignore",
         ".npmignore",
-        "lib/__name__.js");
+        "lib/__name__.js",
+        "test/test.js");
       done();
     });
   });
@@ -36,7 +37,11 @@ describe("fgen", function() {
         gen.context = {
           name: "testlib",
           version: "0.0.0",
-          desc: "A test library."
+          desc: "A test library.",
+          keywords: [
+            {keyword: "test"},
+            {keyword: "lib", last_keyword: true},
+          ]
         };
         done();
       });
@@ -60,12 +65,13 @@ describe("fgen", function() {
         fs.existsSync("test/nodejs_project_templates/tmp/.gitignore").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/.npmignore").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/lib/testlib.js").should.be.true;
+        fs.existsSync("test/nodejs_project_templates/tmp/test/test.js").should.be.true;
         done();
       });
     });
 
     it("all files generation to folder with '/' should be ok", function(done) {
-      gen.generateAll("test/nodejs_project_templates/tmp/", function() {
+      gen.generateAll("test/nodejs_project_templates/tmp/", function(err) {
         should.not.exist(err);
         fs.existsSync("test/nodejs_project_templates/tmp/LICENSE").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/README.md").should.be.true;
@@ -80,15 +86,37 @@ describe("fgen", function() {
     });
 
     it("single file to folder should be generated", function(done) {
-      gen.generate("LICENSE", "test/nodejs_project_templates/tmp/", function() {
+      gen.generate("LICENSE", "test/nodejs_project_templates/tmp/", function(err) {
+        should.not.exist(err);
         fs.existsSync("test/nodejs_project_templates/tmp/LICENSE").should.be.true;
         done();
       });
     });
 
-    it("single file to file should be generated", function(done) {
+    it("single file to file", function(done) {
       gen.generate("LICENSE", "test/nodejs_project_templates/tmp/LIC", function() {
         fs.existsSync("test/nodejs_project_templates/tmp/LIC").should.be.true;
+        done();
+      });
+    });
+
+    it("single file to file - 2", function(done) {
+      gen.generate("package.json", "test/nodejs_project_templates/tmp/", function() {
+        fs.existsSync("test/nodejs_project_templates/tmp/package.json").should.be.true;
+        done();
+      });
+    });
+
+    it("single file with folder prefix", function(done) {
+      gen.generate("test/test.js", "test/nodejs_project_templates/tmp/", function() {
+        fs.existsSync("test/nodejs_project_templates/tmp/test/test.js").should.be.true;
+        done();
+      });
+    });
+
+    it("file names with __key__ form should be mapped", function(done) {
+      gen.generate("lib/__name__.js", "test/nodejs_project_templates/tmp/", function() {
+        fs.existsSync("test/nodejs_project_templates/tmp/lib/testlib.js").should.be.true;
         done();
       });
     });
