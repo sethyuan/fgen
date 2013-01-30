@@ -1,0 +1,31 @@
+{
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "description": "{{desc}}",
+  "main": "./lib/{{name}}.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sethyuan/{{name}}.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sethyuan/{{name}}/issues",
+    "email": "cavingdeep@gmail.com"
+  },
+  "keywords": [
+  {{#keywords}}
+    "{{keyword}}"{{#last_keyword}},{{/last_keyword}}
+  {{/keywords}}
+  ],
+  "author": {
+    "name": "Seth Yuan",
+    "email": "cavingdeep@gmail.com"
+  },
+  "engines": {
+    "node": ">=0.6"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+}

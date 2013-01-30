@@ -29,5 +29,12 @@
     "node": ">=0.6"
   },
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "hogan.js": "~2.0.0",
+    "fs.extra": "~1.2.0"
+  },
+  "devDependencies": {
+    "should": "~1.2.1"
+  }
 }
