@@ -15,7 +15,7 @@ Given you have a folder named `nodejs_templates`, with the following template fi
     lib/__name__.js
     test/
 
-You can write a generator to generate all files or a single file as demonstrated below:
+You can write a generator to generate all files or a single file as demonstrated below. You can also check `test/nodejs_project_templates/*` to have a feel of the template's content.
 
 ```js
 var fgen = require("fgen");
