@@ -23,6 +23,9 @@ describe("fgen", function() {
         ".gitignore",
         ".npmignore",
         "lib/__name__.js",
+        "doc",
+        "lib",
+        "test",
         "test/test.js");
       done();
     });
@@ -66,6 +69,7 @@ describe("fgen", function() {
         fs.existsSync("test/nodejs_project_templates/tmp/.npmignore").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/lib/testlib.js").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/test/test.js").should.be.true;
+        fs.existsSync("test/nodejs_project_templates/tmp/doc").should.be.true;
         done();
       });
     });
@@ -81,6 +85,8 @@ describe("fgen", function() {
         fs.existsSync("test/nodejs_project_templates/tmp/.gitignore").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/.npmignore").should.be.true;
         fs.existsSync("test/nodejs_project_templates/tmp/lib/testlib.js").should.be.true;
+        fs.existsSync("test/nodejs_project_templates/tmp/test/test.js").should.be.true;
+        fs.existsSync("test/nodejs_project_templates/tmp/doc").should.be.true;
         done();
       });
     });
