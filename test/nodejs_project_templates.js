@@ -24,6 +24,7 @@ describe("fgen", function() {
         ".npmignore",
         "lib/__name__.js",
         "doc",
+        "doc/.gitignore",
         "lib",
         "test",
         "test/test.js");
