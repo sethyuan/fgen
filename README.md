@@ -53,7 +53,9 @@ fgen.createGenerator("nodejs_templates", function(err, generator) {
 
 ## Installation
 
-    $ npm install fgen
+```bash
+$ npm install fgen
+```
 
 ## Documentation
 
