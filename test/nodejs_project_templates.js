@@ -16,7 +16,7 @@ describe("fgen", function() {
     this.timeout(500);
     fgen.createGenerator("test/nodejs_project_templates/", function(err, gen) {
       should.not.exist(err);
-      gen.should.have.property("templates").with.keys(
+      gen.should.have.property("_templates").with.keys(
         "LICENSE",
         "README.md",
         "package.json",
