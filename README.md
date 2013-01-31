@@ -48,6 +48,11 @@ fgen.createGenerator("nodejs_templates", function(err, generator) {
   // generator.generate("LICENSE", "~/Desktop/myProj/LIC", function(err) {
   //   if (!err) { console.log("Successful generation."); }
   // });
+
+  // Single file generation using writable streams.
+  // generator.generate("package.json", process.stdout, function(err) {
+  //   if (!err) { console.log("Successful generation."); }
+  // });
 });
 ```
 
@@ -81,13 +86,13 @@ The context object to pass to templates. It contains all the generation logics. 
 
 ### generator.generate(key, to, callback)
 
-Generates a single file. `key` corresponds to templates' path, e.g. *lib/__name__.js*, `to` is where you want to generate the file to. Once file generation is complete, `callback` is called with the first argument being `err` if any.
+Generates a single file. `key` corresponds to templates' path, e.g. *lib/__name__.js*, `to` is where you want to generate the file to. Currently, string and writable stream types of `to` are supported. Once file generation is complete, `callback` is called with the first argument being `err` if any.
 
-File names with double underscore like `__name__.js` will be substituted for the corresponding values in the context object.
+File names with double underscores like `__name__.js` will be substituted for the corresponding values in the context object.
 
 ### generator.generateAll(to, callback)
 
-Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structure.
+Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structures. Unlike [`generator.generate`](#generatorgeneratekey-to-callback), `to` can only be a string representing a folder to where file generation ocurrs.
 
 ## License
 
