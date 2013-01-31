@@ -140,5 +140,19 @@ describe("fgen", function() {
         done();
       });
     });
+
+    it("single file to stdout", function(done) {
+      gen.generate("package.json", process.stdout, function(err) {
+        should.not.exist(err);
+        done();
+      });
+    });
+
+    it("single folder to stdout", function(done) {
+      gen.generate("doc", process.stdout, function(err) {
+        should.not.exist(err);
+        done();
+      });
+    });
   });
 });
