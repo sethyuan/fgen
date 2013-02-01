@@ -155,5 +155,23 @@ describe("fgen", function() {
         done();
       });
     });
+
+    it("generate with empty callback", function(done) {
+      this.timeout(200);
+      gen.generate("LICENSE", process.stdout);
+      setTimeout(done, 190);
+    });
+
+    it("generate with empty callback - 2", function(done) {
+      this.timeout(200);
+      gen.generate("LICENSE", "test/nodejs_project_templates/tmp/");
+      setTimeout(done, 190);
+    });
+
+    it("generateAll with empty callback", function(done) {
+      this.timeout(200);
+      gen.generateAll("test/nodejs_project_templates/tmp/");
+      setTimeout(done, 190);
+    });
   });
 });
