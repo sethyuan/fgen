@@ -41,7 +41,7 @@ fgen.createGenerator("nodejs_templates", function(err, generator) {
 
   // Generate all files and folder structures.
   generator.generateAll("~/Desktop/myProj", function(err) {
-    if (!err) { console.log("Successful generation."); }
+    if (!err) console.log("Successful generation.");
   });
 
   // Single file generation.
@@ -84,15 +84,15 @@ The `templatesFolder` you passed in when you created the generator.
 
 The context object to pass to templates. It contains all the generation logics. Please refer to [mustache's documentation](http://mustache.github.com/mustache.5.html) about this context. We use [Hogan.js](http://twitter.github.com/hogan.js) as the mustache engine, so you can also refer to Hogan.js' documentation.
 
-### generator.generate(key, to, callback)
+### generator.generate(key, to, [callback])
 
 Generates a single file. `key` corresponds to templates' path, e.g. *lib/__name__.js*, `to` is where you want to generate the file to. Currently, string and writable stream types of `to` are supported. Once file generation is complete, `callback` is called with the first argument being `err` if any.
 
 File names with double underscores like `__name__.js` will be substituted for the corresponding values in the context object.
 
-### generator.generateAll(to, callback)
+### generator.generateAll(to, [filter], [callback])
 
-Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structures. Unlike [`generator.generate`](#generatorgeneratekey-to-callback), `to` can only be a string representing a folder to where file generation ocurrs.
+Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structures except those you filter out using the `filter` argument, which, is a predicate function. Unlike [`generator.generate`](#generatorgeneratekey-to-callback), `to` can only be a string representing a folder to where file generation ocurrs.
 
 ## License
 

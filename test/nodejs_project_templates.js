@@ -23,10 +23,10 @@ describe("fgen", function() {
         ".gitignore",
         ".npmignore",
         "lib/__name__.js",
-        "doc",
+        "doc/",
         "doc/.gitignore",
-        "lib",
-        "test",
+        "lib/",
+        "test/",
         "test/test.js");
       done();
     });
@@ -129,14 +129,14 @@ describe("fgen", function() {
     });
 
     it("single folder to folder", function(done) {
-      gen.generate("doc", "test/nodejs_project_templates/tmp/", function() {
+      gen.generate("doc/", "test/nodejs_project_templates/tmp/", function(err) {
         fs.existsSync("test/nodejs_project_templates/tmp/doc").should.be.true;
-        done();
+        done(err);
       });
     });
 
     it("single folder to a renamed folder", function(done) {
-      gen.generate("doc", "test/nodejs_project_templates/tmp/d", function() {
+      gen.generate("doc/", "test/nodejs_project_templates/tmp/d", function() {
         fs.existsSync("test/nodejs_project_templates/tmp/d").should.be.true;
         done();
       });
@@ -150,7 +150,7 @@ describe("fgen", function() {
     });
 
     it("single folder to stdout", function(done) {
-      gen.generate("doc", process.stdout, function(err) {
+      gen.generate("doc/", process.stdout, function(err) {
         should.not.exist(err);
         done();
       });
@@ -172,6 +172,23 @@ describe("fgen", function() {
       this.timeout(200);
       gen.generateAll("test/nodejs_project_templates/tmp/");
       setTimeout(done, 190);
+    });
+
+    it("optional filter function when generateAll", function(done) {
+      var filter = function(key) {
+        return !/^test\//.test(key);
+      };
+      gen.generateAll("test/nodejs_project_templates/tmp", filter, function(err) {
+        fs.existsSync("test/nodejs_project_templates/tmp/test").should.be.false;
+        done(err);
+      });
+    });
+
+    it("non-existent key generation", function(done) {
+      gen.generate("xxx", process.stdout, function(err) {
+        should.exist(err);
+        done();
+      });
     });
   });
 });
