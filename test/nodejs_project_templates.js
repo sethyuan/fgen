@@ -1,6 +1,7 @@
 var fgen = require("../"),
     should = require("should"),
-    fs = require("fs.extra");
+    fs = require("fs.extra"),
+    path = require("path");
 
 describe("fgen", function() {
   it("create generator should be ok", function() {
@@ -22,12 +23,12 @@ describe("fgen", function() {
         "package.json",
         ".gitignore",
         ".npmignore",
-        "lib/__name__.js",
-        "doc/",
-        "doc/.gitignore",
-        "lib/",
-        "test/",
-        "test/test.js");
+        path.normalize("lib/__name__.js"),
+        path.normalize("doc/"),
+        path.normalize("doc/.gitignore"),
+        path.normalize("lib/"),
+        path.normalize("test/"),
+        path.normalize("test/test.js"));
       done();
     });
   });
@@ -176,7 +177,7 @@ describe("fgen", function() {
 
     it("optional filter function when generateAll", function(done) {
       var filter = function(key) {
-        return !/^test\//.test(key);
+        return !/^test(\/|\\)/.test(key);
       };
       gen.generateAll("test/nodejs_project_templates/tmp", filter, function(err) {
         fs.existsSync("test/nodejs_project_templates/tmp/test").should.be.false;
