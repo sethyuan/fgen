@@ -1,6 +1,6 @@
 {
   "name": "fgen",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A file generator library to be used to generate project structures, file templates and/or snippets. Templates are based on mustache.",
   "main": "./lib/fgen.js",
   "scripts": {
@@ -28,16 +28,16 @@
     "email": "cavingdeep@gmail.com"
   },
   "engines": {
-    "node": ">=0.6"
+    "node": ">=0.8"
   },
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "hogan.js": "~2.0.0",
-    "fs.extra": "~1.2.0",
-    "async": "~0.1.22"
+    "hogan.js": "2.x",
+    "fs.extra": ">=1.2 <2.0",
+    "async": ">=0.1 <1.0"
   },
   "devDependencies": {
-    "should": "~1.2.1"
+    "should": ">=1.2 <2.0"
   }
 }
