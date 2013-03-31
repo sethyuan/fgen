@@ -66,7 +66,7 @@ $ npm install fgen
 
 ### fgen.createGenerator(templatesFolder, [readyListener])
 
-Returns a [`fgen.Generator`](#class-fgengenerator) object, this reprensents the `templatesFolder` and its generation logics. The `readyListener` is a function which is automatically added to the [`'ready'`](#eventready) event.
+Returns a [`fgen.Generator`](#class-fgengenerator) object, this represents the `templatesFolder` and its generation logics. The `readyListener` is a function which is automatically added to the [`'ready'`](#eventready) event.
 
 ## Class: fgen.Generator
 
@@ -92,7 +92,7 @@ File names with double underscores like `__name__.js` will be substituted for th
 
 ### generator.generateAll(to, [filter], [callback])
 
-Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structures except those you filter out using the `filter` argument, which, is a predicate function. Unlike [`generator.generate`](#generatorgeneratekey-to-callback), `to` can only be a string representing a folder to where file generation ocurrs.
+Like [`generator.generate`](#generatorgeneratekey-to-callback) but generates all the files and folder structures except those you filter out using the `filter` argument, which is a predicate function accepting a file path and returning a boolean indicating which files should be included and which are not. Unlike [`generator.generate`](#generatorgeneratekey-to-callback), `to` can only be a string representing a folder to where file generation ocurrs.
 
 ## License
 
