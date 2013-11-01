@@ -1,7 +1,9 @@
-var fgen = require("../"),
-    should = require("should"),
-    fs = require("fs.extra"),
-    path = require("path");
+"use strict";
+
+var fgen = require("../");
+var should = require("should");
+var fs = require("fs.extra");
+var path = require("path");
 
 describe("fgen", function() {
   it("create generator should be ok", function() {
@@ -10,14 +12,15 @@ describe("fgen", function() {
 
   it("ready event is fired (within 1s)", function(done) {
     this.timeout(500);
-    fgen.createGenerator("test/nodejs_project_templates/", done);
+    fgen.createGenerator("test/nodejs_project_templates/", function(gen) {
+      done();
+    });
   });
 
   it("ready event fired with templates compiled", function(done) {
     this.timeout(500);
-    fgen.createGenerator("test/nodejs_project_templates/", function(err, gen) {
-      should.not.exist(err);
-      gen.should.have.property("_templates").with.keys(
+    fgen.createGenerator("test/nodejs_project_templates/", function(gen) {
+      gen.should.have.property("templates_").with.keys(
         "LICENSE",
         "README.md",
         "package.json",
@@ -37,8 +40,7 @@ describe("fgen", function() {
     var gen;
 
     before(function(done) {
-      gen = fgen.createGenerator("test/nodejs_project_templates/", function(err) {
-        should.not.exist(err);
+      gen = fgen.createGenerator("test/nodejs_project_templates/", function() {
         gen.context = {
           name: "testlib",
           version: "0.0.0",

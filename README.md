@@ -21,12 +21,7 @@ You can write a generator to generate all files or a single file as demonstrated
 var fgen = require("fgen");
 
 // You provide a folder with mustache syntax template files.
-fgen.createGenerator("nodejs_templates", function(err, generator) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
+var generator = fgen.createGenerator("nodejs_templates", function() {
   // Underscore files like __name__.js will be substituted for the
   // corresponding values in the context object.
   generator.context = {
@@ -54,6 +49,10 @@ fgen.createGenerator("nodejs_templates", function(err, generator) {
   //   if (!err) { console.log("Successful generation."); }
   // });
 });
+
+generator.on("error", function(err) {
+  console.error(err);
+});
 ```
 
 ## Installation
@@ -71,6 +70,10 @@ Returns a [`fgen.Generator`](#class-fgengenerator) object, this represents the `
 ## Class: fgen.Generator
 
 This is an EventEmitter with the following events:
+
+### Event:'error'
+
+Emitted if generator encountered problems loading templates.
 
 ### Event:'ready'
 
