@@ -52,7 +52,6 @@ describe("fgen", function() {
           desc: "A test library.",
           v1: "v1",
           v2: "v2",
-          init: "__init__",
           keywords: [
             {keyword: "test"},
             {keyword: "lib", last_keyword: true},
