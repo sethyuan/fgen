@@ -1,6 +1,6 @@
 {
   "name": "fgen",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A file generator library to be used to generate project structures, file templates and/or snippets. Templates are based on mustache.",
   "main": "./lib/fgen.js",
   "scripts": {
@@ -38,6 +38,7 @@
     "async": ">=0.1 <1.0"
   },
   "devDependencies": {
+    "mocha": "^2.4.5",
     "should": ">=1.2 <2.0"
   }
 }

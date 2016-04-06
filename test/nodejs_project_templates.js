@@ -20,12 +20,17 @@ describe("fgen", function() {
   it("ready event fired with templates compiled", function(done) {
     this.timeout(500);
     fgen.createGenerator("test/nodejs_project_templates/", function(gen) {
+      console.log(Object.keys(gen.templates_));
       gen.should.have.property("templates_").with.keys(
         "LICENSE",
         "README.md",
         "package.json",
         ".gitignore",
         ".npmignore",
+        "__v1__/",
+        "__v1__/__init__.py",
+        "__v1__/test/",
+        "__v1__/test/__v2__.js",
         path.normalize("lib/__name__.js"),
         path.normalize("doc/"),
         path.normalize("doc/.gitignore"),
@@ -45,6 +50,9 @@ describe("fgen", function() {
           name: "testlib",
           version: "0.0.0",
           desc: "A test library.",
+          v1: "v1",
+          v2: "v2",
+          init: "__init__",
           keywords: [
             {keyword: "test"},
             {keyword: "lib", last_keyword: true},
